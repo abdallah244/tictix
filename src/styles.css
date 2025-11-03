@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+/* styles.css */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #8B4513;
+  --secondary-color: #D2691E;
+  --accent-color: #CD853F;
+  --background-color: #F5DEB3;
+  --text-color: #654321;
+  --card-color: #DEB887;
+  --dark-wood: #5D4037;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}

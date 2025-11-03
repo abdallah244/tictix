@@ -1,0 +1,220 @@
+<!-- src/app/components/game-mode-modal/game-mode-modal.component.html -->
+<div class="modal-container">
+  <div class="modal-header">
+    <h2 class="modal-title">{{ getStepTitle() }}</h2>
+    <button class="close-btn" (click)="close()">
+      <span class="close-icon">×</span>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <p class="step-description">{{ getStepDescription() }}</p>
+
+    <!-- Step 1: Game Mode Selection -->
+    <div class="step" *ngIf="!selectedMode">
+      <div class="mode-cards">
+        <div class="mode-card computer-mode" (click)="selectMode('computer')">
+          <div class="card-icon">🤖</div>
+          <div class="card-content">
+            <h3 class="card-title">VS Computer</h3>
+            <p class="card-description">
+              Challenge our intelligent AI opponent with adjustable difficulty levels.
+              Perfect for solo practice and skill improvement.
+            </p>
+            <div class="card-features">
+              <span class="feature">• Smart AI Opponent</span>
+              <span class="feature">• Multiple Difficulty Levels</span>
+              <span class="feature">• Adaptive Gameplay</span>
+            </div>
+          </div>
+          <div class="card-highlight"></div>
+        </div>
+
+        <div class="mode-card player-mode" (click)="selectMode('player')">
+          <div class="card-icon">👥</div>
+          <div class="card-content">
+            <h3 class="card-title">Player VS Player</h3>
+            <p class="card-description">
+              Play against a friend on the same device. Perfect for head-to-head
+              battles and friendly competitions.
+            </p>
+            <div class="card-features">
+              <span class="feature">• Local Multiplayer</span>
+              <span class="feature">• Real-time Action</span>
+              <span class="feature">• Friendly Competition</span>
+            </div>
+          </div>
+          <div class="card-highlight"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Difficulty Selection (Computer Mode) -->
+    <div class="step" *ngIf="selectedMode === 'computer' && !selectedDifficulty">
+      <div class="difficulty-cards">
+        <div class="difficulty-card"
+             [class.selected]="selectedDifficulty === 'easy'"
+             (click)="selectDifficulty('easy')">
+          <div class="difficulty-header">
+            <div class="difficulty-icon">😊</div>
+            <h4 class="difficulty-title">Easy</h4>
+          </div>
+          <p class="difficulty-description">
+            Perfect for beginners. The AI makes occasional mistakes and focuses
+            on learning the basics.
+          </p>
+          <div class="difficulty-indicator">
+            <div class="difficulty-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <span class="difficulty-label">Beginner Friendly</span>
+          </div>
+        </div>
+
+        <div class="difficulty-card"
+             [class.selected]="selectedDifficulty === 'medium'"
+             (click)="selectDifficulty('medium')">
+          <div class="difficulty-header">
+            <div class="difficulty-icon">😐</div>
+            <h4 class="difficulty-title">Medium</h4>
+          </div>
+          <p class="difficulty-description">
+            Balanced challenge for experienced players. The AI plays strategically
+            but can be beaten with good moves.
+          </p>
+          <div class="difficulty-indicator">
+            <div class="difficulty-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <span class="difficulty-label">Strategic Play</span>
+          </div>
+        </div>
+
+        <div class="difficulty-card"
+             [class.selected]="selectedDifficulty === 'hard'"
+             (click)="selectDifficulty('hard')">
+          <div class="difficulty-header">
+            <div class="difficulty-icon">😈</div>
+            <h4 class="difficulty-title">Hard</h4>
+          </div>
+          <p class="difficulty-description">
+            Extreme challenge for experts. The AI rarely makes mistakes and will
+            capitalize on any error you make.
+          </p>
+          <div class="difficulty-indicator">
+            <div class="difficulty-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <span class="difficulty-label">Expert Level</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Symbol Selection -->
+    <div class="step" *ngIf="(selectedMode === 'computer' && selectedDifficulty) || (selectedMode === 'player')">
+      <div class="symbol-cards">
+        <div class="symbol-card"
+             [class.selected]="selectedSymbol === 'X'"
+             (click)="selectSymbol('X')">
+          <div class="symbol-display">
+            <div class="symbol x-symbol">X</div>
+          </div>
+          <div class="symbol-content">
+            <h4 class="symbol-title">X - The Aggressor</h4>
+            <p class="symbol-description">
+              Starts first and controls the pace. Perfect for players who prefer
+              offensive strategies and taking initiative.
+            </p>
+            <div class="symbol-traits">
+              <span class="trait">• First Move Advantage</span>
+              <span class="trait">• Offensive Playstyle</span>
+              <span class="trait">• Pace Controller</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="symbol-card"
+             [class.selected]="selectedSymbol === 'O'"
+             (click)="selectSymbol('O')">
+          <div class="symbol-display">
+            <div class="symbol o-symbol">O</div>
+          </div>
+          <div class="symbol-content">
+            <h4 class="symbol-title">O - The Strategist</h4>
+            <p class="symbol-description">
+              Reacts and counter-attacks. Ideal for defensive players who excel
+              at reading opponents and setting traps.
+            </p>
+            <div class="symbol-traits">
+              <span class="trait">• Counter-Attack Specialist</span>
+              <span class="trait">• Defensive Mastery</span>
+              <span class="trait">• Strategic Thinker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn back-btn"
+              *ngIf="selectedMode && ((selectedMode === 'computer' && !selectedDifficulty) || (selectedMode === 'player' && !selectedSymbol))"
+(click)="selectedMode = null"
+>
+        <span class="btn-icon">←</span>
+        Back to Modes
+      </button>
+
+      <button class="btn back-btn"
+              *ngIf="selectedMode === 'computer' && selectedDifficulty && !selectedSymbol"
+              (click)="selectedDifficulty = null"
+>
+        <span class="btn-icon">←</span>
+        Back to Difficulty
+      </button>
+
+      <div class="spacer"></div>
+
+      <button class="btn start-btn"
+              [class.disabled]="!isStepComplete()"
+              (click)="startGame()"
+              [disabled]="!isStepComplete()">
+        <span class="btn-icon">🎮</span>
+        Start Game
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Progress Indicator -->
+  <div class="progress-indicator">
+    <div class="progress-step" [class.active]="!selectedMode">
+      <div class="step-number">1</div>
+      <span class="step-label">Mode</span>
+    </div>
+    <div class="progress-step"
+         [class.active]="selectedMode && ((selectedMode === 'computer' && !selectedDifficulty) || (selectedMode === 'player' && !selectedSymbol))">
+      <div class="step-number">2</div>
+      <span class="step-label" *ngIf="selectedMode === 'computer'">Difficulty</span>
+      <span class="step-label" *ngIf="selectedMode === 'player'">Symbol</span>
+    </div>
+    <div class="progress-step"
+         [class.active]="isStepComplete()">
+      <div class="step-number">3</div>
+      <span class="step-label">Ready</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<!-- loading.component.html -->
+<div class="loading-container">
+  <!-- الخلفية المتحركة -->
+  <div class="background-animation">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="loading-content">
+    <!-- الشعار -->
+    <div class="logo">
+      <div class="logo-icon">⨉⦿</div>
+      <h1 class="logo-text">TicTix</h1>
+    </div>
+
+    <!-- لوحة اللعبة المتحركة -->
+    <div class="game-preview">
+      <div class="board-container">
+        <div class="board-frame">
+          <div class="board">
+            <div class="cell" *ngFor="let cell of cells; let i = index"
+                 [class.x]="cell === 'X'"
+                 [class.o]="cell === 'O'"
+                 [class.winning]="isWinningCell(i)">
+              <span class="symbol">{{ cell }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- تأثيرات الفوز -->
+        <div class="winner-effects">
+          <div class="winner-message"></div>
+          <div class="particles"></div>
+          <div class="confetti"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- شريط التقدم -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-text">Loading Amazing Experience...</div>
+    </div>
+
+    <!-- التلميحات -->
+    <div class="hints">
+      <div class="hint">• Strategic Gameplay</div>
+      <div class="hint">• Multiple Difficulty Levels</div>
+      <div class="hint">• Live Leaderboard</div>
+    </div>
+  </div>
+
+  <!-- حقوق الطبع -->
+  <div class="copyright">
+    © 2024 TicTix - Crafted with Excellence
+  </div>
+</div>

@@ -1,0 +1,347 @@
+/* loading.component.css */
+.loading-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5D4037 0%, #8B4513 50%, #D2691E 100%);
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* الخلفية المتحركة */
+.background-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 10%;
+  animation-delay: -2s;
+}
+
+.shape-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* المحتوى الرئيسي */
+.loading-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* الشعار */
+.logo {
+  margin-bottom: 3rem;
+  animation: slideDown 1s ease-out;
+}
+
+.logo-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+}
+
+.logo-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  letter-spacing: 3px;
+}
+
+/* معاينة اللعبة */
+.game-preview {
+  margin: 2rem 0;
+}
+
+.board-container {
+  position: relative;
+  display: inline-block;
+}
+
+.board-frame {
+  background: linear-gradient(145deg, #6B4F3D, #8B5A2B);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  border: 2px solid #A0522D;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  grid-template-rows: repeat(3, 90px);
+  gap: 8px;
+  background-color: #A0522D;
+  padding: 10px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.board::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  border-radius: 16px;
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #DEB887, #F5DEB3);
+  border-radius: 8px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border: 2px solid transparent;
+}
+
+.cell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.cell.x {
+  color: #8B4513;
+  animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-color: #8B4513;
+}
+
+.cell.o {
+  color: #D2691E;
+  animation: popIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-color: #D2691E;
+}
+
+.cell.winning {
+  animation: winPulse 0.6s ease-in-out 3;
+  background: linear-gradient(145deg, #FFD700, #FFA500);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes winPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* تأثيرات الفوز */
+.winner-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.winner-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  background: linear-gradient(45deg, #8B4513, #D2691E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  z-index: 10;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.winner-message.show {
+  transform: translate(-50%, -50%) scale(1);
+  animation: winnerText 1s ease-out;
+}
+
+@keyframes winnerText {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); }
+  50% { transform: translate(-50%, -50%) scale(1.2) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: particlePop var(--duration) ease-out var(--delay) forwards;
+  opacity: 0;
+}
+
+@keyframes particlePop {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(calc(var(--x) - 50vw), calc(var(--y) - 50vh)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--x) - 50vw), calc(var(--y) - 50vh)) scale(0);
+  }
+}
+
+.particles.active .particle {
+  animation: particlePop var(--duration) ease-out var(--delay) forwards;
+}
+
+/* شريط التقدم */
+.progress-container {
+  margin: 2rem 0;
+  animation: slideUp 1s ease-out 0.5s both;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
+  border-radius: 4px;
+  animation: progressFill 5s ease-in-out;
+  box-shadow: 0 0 20px rgba(255,165,0,0.5);
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.progress-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* التلميحات */
+.hints {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  animation: slideUp 1s ease-out 1s both;
+}
+
+.hint {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: hintPulse 2s infinite;
+}
+
+.hint:nth-child(2) { animation-delay: 0.5s; }
+.hint:nth-child(3) { animation-delay: 1s; }
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+/* حقوق الطبع */
+.copyright {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  animation: fadeIn 2s ease-out 2s both;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}

@@ -1,0 +1,78 @@
+<!-- src/app/components/game-result-modal/game-result-modal.component.html -->
+<div class="result-modal-container" [class]="getResultColor()">
+  <!-- الخلفية المتحركة -->
+  <div class="result-background">
+    <div class="floating-confetti" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+  </div>
+
+  <!-- المحتوى الرئيسي -->
+  <div class="result-content">
+    <!-- الأيقونة والنتيجة -->
+    <div class="result-header">
+      <div class="result-icon">
+        {{ getResultIcon() }}
+      </div>
+      <h2 class="result-title">{{ getResultTitle() }}</h2>
+    </div>
+
+    <!-- الرسالة -->
+    <div class="result-message">
+      {{ data.message }}
+    </div>
+
+    <!-- النتائج -->
+    <div class="score-summary">
+      <div class="score-item x-score">
+        <div class="score-symbol">X</div>
+        <div class="score-value">{{ data.scores.X }}</div>
+        <div class="score-label">Wins</div>
+      </div>
+
+      <div class="score-divider">:</div>
+
+      <div class="score-item o-score">
+        <div class="score-symbol">O</div>
+        <div class="score-value">{{ data.scores.O }}</div>
+        <div class="score-label">Wins</div>
+      </div>
+    </div>
+
+    <!-- الإحصائيات -->
+    <div class="game-stats">
+      <div class="stat-item">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getTotalGames() }}</div>
+          <div class="stat-label">Total Games</div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-info">
+          <div class="stat-value">{{ getWinRate() }}%</div>
+          <div class="stat-label">Win Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- أزرار الإجراء -->
+    <div class="action-buttons">
+      <button class="action-btn restart-btn" (click)="onRestart()">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">Play Again</span>
+        <div class="btn-shine"></div>
+      </button>
+
+      <button class="action-btn menu-btn" (click)="onMenu()">
+        <span class="btn-icon">🏠</span>
+        <span class="btn-text">Main Menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- التأثيرات السفلية -->
+  <div class="result-effects">
+    <div class="effect-particles"></div>
+  </div>
+</div>

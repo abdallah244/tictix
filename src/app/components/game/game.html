@@ -1,0 +1,117 @@
+<!-- game.component.html -->
+<div class="game-container">
+  <header class="game-header">
+    <div class="header-content">
+      <button class="back-btn" (click)="navigateToHome()">
+        <span class="back-icon">←</span>
+        Back to Home
+      </button>
+
+      <div class="game-title">
+        <span class="title-icon">⨉⦿</span>
+        <span class="title-text">TicTix Arena</span>
+      </div>
+
+      <div class="game-mode">
+        <span class="mode-badge">{{ getGameModeText() }}</span>
+        <span class="difficulty-badge" *ngIf="gameMode === 'computer'">
+          {{ difficulty }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section class="score-board">
+    <div class="player-score" [class.active]="isCurrentPlayer('X')">
+      <div class="player-info">
+        <div class="player-symbol x">X</div>
+        <div class="player-details">
+          <div class="player-name">{{ getPlayerName('X') }}</div>
+          <div class="player-type" *ngIf="gameMode === 'computer'">
+            {{ playerSymbol === 'X' ? 'Human' : 'AI' }}
+          </div>
+        </div>
+      </div>
+      <div class="score">{{ scores.X }}</div>
+    </div>
+
+    <div class="vs-separator">
+      <span>VS</span>
+    </div>
+
+    <div class="player-score" [class.active]="isCurrentPlayer('O')">
+      <div class="player-info">
+        <div class="player-symbol o">O</div>
+        <div class="player-details">
+          <div class="player-name">{{ getPlayerName('O') }}</div>
+          <div class="player-type" *ngIf="gameMode === 'computer'">
+            {{ playerSymbol === 'O' ? 'Human' : 'AI' }}
+          </div>
+        </div>
+      </div>
+      <div class="score">{{ scores.O }}</div>
+    </div>
+  </section>
+
+  <section class="game-board-section">
+    <div class="current-turn">
+      <!-- في game.component.html -->
+<div class="turn-indicator"
+     [class]="currentPlayer"
+     [class.thinking]="isComputerThinking"
+     [class.ai-turn]="gameMode === 'computer' && currentPlayer !== playerSymbol">
+</div>
+      <span class="turn-text">
+        {{ getTurnText() }}
+      </span>
+    </div>
+
+    <div class="board-container">
+      <div class="board">
+        <div class="board-cell"
+             *ngFor="let cell of board; let i = index"
+             (click)="makeMove(i)"
+             [class.filled]="cell"
+             [class.x]="cell === 'X'"
+             [class.o]="cell === 'O'"
+             [class.winning]="isWinningCell(i)"
+             [class.clickable]="isCellClickable(i)">
+          <span class="cell-symbol">{{ cell }}</span>
+          <div class="cell-glow"></div>
+        </div>
+      </div>
+
+      <div class="board-effects">
+        <div class="effect-circle"></div>
+        <div class="effect-glow"></div>
+      </div>
+    </div>
+
+    <div class="game-status" *ngIf="isGameOver">
+      <div class="status-message" [class]="winner">
+        <span *ngIf="winner === 'draw'">Game Draw! 🤝</span>
+        <span *ngIf="winner !== 'draw'">
+          {{ getWinnerMessage(winner!) }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="game-controls">
+    <button class="control-btn restart" (click)="restartGame()">
+      <span class="btn-icon">🔄</span>
+      Restart Game
+    </button>
+
+    <button class="control-btn menu" (click)="navigateToHome()">
+      <span class="btn-icon">🏠</span>
+      Main Menu
+    </button>
+  </section>
+
+  <footer class="game-footer">
+    <div class="footer-content">
+      <span class="footer-text">Make your move strategically 🎯</span>
+    </div>
+  </footer>
+</div>

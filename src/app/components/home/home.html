@@ -1,0 +1,170 @@
+<div class="home-container">
+  <!-- المحتوى الرئيسي -->
+  <main class="main-content">
+    <!-- الهيدر الخفيف -->
+    <header class="main-header">
+      <div class="header-content">
+        <div class="header-logo">
+          <span class="logo-icon">⨉⦿</span>
+          <span class="logo-text">TicTix</span>
+        </div>
+        <nav class="header-nav">
+          <button class="nav-btn" >
+            <span class="nav-icon">🏆</span>
+            <span class="nav-text" onclick="alert('SOON')">Leaderboard</span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- الهيرو سيكشن -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <div class="floating-element el-1">⨉</div>
+        <div class="floating-element el-2">⦿</div>
+        <div class="floating-element el-3">⨉</div>
+      </div>
+
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Premium Gaming Experience
+          </div>
+
+          <h1 class="hero-title">
+            <span class="title-line">Strategic</span>
+            <span class="title-accent">TicTacToe</span>
+            <span class="title-line">Mastery</span>
+          </h1>
+
+          <p class="hero-description">
+            Engage in timeless battles of wits. Beautiful design, intelligent AI,
+            and competitive leaderboards await your strategic prowess.
+          </p>
+
+          <div class="hero-features">
+            <div class="feature-item">
+              <div class="feature-icon">🎯</div>
+              <div class="feature-content">
+                <div class="feature-title">Smart AI</div>
+                <div class="feature-desc">Adaptive difficulty levels</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <div class="feature-title">Fast Play</div>
+                <div class="feature-desc">Smooth 60fps gameplay</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🌍</div>
+              <div class="feature-content">
+                <div class="feature-title">Global Rank</div>
+                <div class="feature-desc">Compete worldwide</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="cta-button" (click)="openGameModeModal()">
+            <span class="cta-shine"></span>
+            <span class="cta-content">
+              <span class="cta-icon">🎮</span>
+              Start Playing
+            </span>
+          </button>
+        </div>
+
+        <div class="hero-preview">
+          <div class="preview-container">
+            <div class="preview-board">
+              <div class="board">
+                <div class="board-cell" *ngFor="let cell of previewCells; let i = index"
+                     [class.filled]="cell"
+                     [class.x]="cell === 'X'"
+                     [class.o]="cell === 'O'">
+                  <span class="cell-symbol">{{ cell }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="preview-stats">
+              <div class="stat">
+                <div class="stat-value">1.2k</div>
+                <div class="stat-label">Online</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">89%</div>
+                <div class="stat-label">Win Rate</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- السيد بار على اليمين -->
+  <aside class="right-sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-section">
+        <h3 class="section-title">Quick Play</h3>
+        <button class="sidebar-btn" (click)="openGameModeModal()">
+          <span class="btn-icon">⚡</span>
+          <span class="btn-text">Quick Match</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="section-title">Live Stats</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">👑</div>
+            <div class="stat-info">
+              <div class="stat-number">256</div>
+              <div class="stat-label">Champions</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <div class="stat-number">98.7%</div>
+              <div class="stat-label">Accuracy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="section-title">Recent Games</h3>
+        <div class="games-list">
+          <div class="game-item">
+            <div class="game-result win">W</div>
+            <div class="game-info">
+              <div class="game-players">You vs AI</div>
+              <div class="game-time">2 min ago</div>
+            </div>
+          </div>
+          <div class="game-item">
+            <div class="game-result loss">L</div>
+            <div class="game-info">
+              <div class="game-players">Player vs Player</div>
+              <div class="game-time">5 min ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- الفوتر الخفيف -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-text">
+        <span>© 2025 TicTix</span>
+        <span class="footer-divider">•</span>
+        <span>Made By Abdallah Hany</span>
+      </div>
+    </div>
+  </footer>
+</div>
